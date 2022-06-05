@@ -62,15 +62,19 @@ body {
 .logo {
   height: 68px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
   padding: .5rem;
   margin-bottom: 50px;
+}
+
+.sidebar h3 {
+  font-size: 1.25rem;
 }
 
 .navlist {
   display: grid;
   list-style: none;
-  font-size: 1.2rem;
+  line-height: 1.25;
 }
 
 .navlist > li {
@@ -80,8 +84,8 @@ body {
 .navlist > li > a {
   height: 52px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  /* align-items: center; */
+  gap: 16px;
   padding: 8px 20px;
 }
 
