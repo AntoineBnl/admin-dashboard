@@ -2,16 +2,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-@font-face {
-  font-family: "Inter";
-  src: url("fonts/Inter.var.woff2") format("woff2 supports variations"),
-       url("fonts/Inter.var.woff2") format("woff2-variations");
-  font-weight: 1 999;
-  font-stretch: 75% 100%;
-  font-style: oblique 0deg 20deg;
-  font-display: swap;
-}
-
 :root {
   --font-dark: hsl(12, 6%, 15%);
   --light-grey: hsl(214, 32%, 91%);
@@ -129,8 +119,8 @@ header {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: grid;
   grid-template: auto 1fr / 1.7fr 1fr;
-  padding: 20px;
-  gap: 20px;
+  padding: 8px 20px 14px;
+  gap: 16px 20px;
 }
 
 .search {
@@ -141,12 +131,49 @@ header {
 
 input[type=search] {
   border-radius: 2rem;
-  border: none;
+  border: 2px solid #0000;
   background-color: var(--light-grey);
   height: 1.8rem;
   width: 80%;
   max-width: 720px;
   padding: .2rem .8rem;
+
+  transition: border 100ms;
+}
+
+input[type=search]:hover {
+  border-color: hsl(214, 100%, 50%);
+}
+
+.admin-buttons {
+  font-size: 1.2rem;
+  font-weight: 800;
+
+  /* max-width: 280px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.admin-buttons .notifications-bell {
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 4px solid #0000;
+}
+
+.admin-buttons .notifications-bell:hover {
+  background-color: var(--light-grey);
+  border-color: var(--light-grey);
+}
+
+.admin-buttons .notifications-bell:active {
+  transform: scale(0.92);
+}
+
+.admin-buttons img {
+  height: 50px;
+  border-radius: 50%;
 }
 
 .admin-buttons button {
@@ -155,6 +182,7 @@ input[type=search] {
   outline: none;
   background: none;
   cursor: pointer;
+  color: var(--font-dark);
 }
 
 .left {
@@ -186,7 +214,7 @@ input[type=search] {
 .main-buttons {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: center;
   justify-items: center;
   justify-content: center;
   gap: 1rem;
@@ -224,7 +252,7 @@ input[type=search] {
   display: grid;
   grid-template-columns: minmax(min-content, 71%) auto;
   gap: 20px;
-  padding: 30px;
+  padding: 24px 30px;
 }
 
 .content h2{
@@ -261,11 +289,12 @@ input[type=search] {
 }
 
 .side-content {
+  min-width: 224px;
   max-width: 280px;
   justify-self: center;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
 }
 
 .announcements {
@@ -283,14 +312,13 @@ input[type=search] {
 .announcements:hover {
   background-color: hsl(0, 0%, 97%);
   box-shadow: rgba(0, 0, 0, 0.36) 0px 3px 8px;
-  cursor: pointer;
 }
 
 .trending {
   border-radius: .5rem;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  padding: 20px;
+  padding: 20px 12px;
   display: grid;
   gap: 15px;
   font-size: .9rem;
@@ -301,12 +329,34 @@ input[type=search] {
 .trending:hover {
   background-color: hsl(0, 0%, 97%);
   box-shadow: rgba(0, 0, 0, 0.36) 0px 3px 8px;
-  cursor: pointer;
+}
+
+.trending-project {
+  display: grid;
+  grid-template-columns: 50px auto;
+  gap: 10px;
+}
+
+.trending-project > img {
+  border-radius: 50%;
+  height: 50px;
+}
+
+.trending-project > p {
+  align-self: center;
+  font-weight: 500;
+  color: #555;
+}
+
+.trending-project > p > .handle {
+  display: block;
+  font-weight: bold;
+  color: var(--font-dark);
 }
 
 /* Mobile Styles */
 
-@media only screen and (max-width: 911px) {
+@media only screen and (max-width: 940px) {
   body {
     min-width: 620px;
     grid-template-columns: 64px 1fr;
@@ -345,6 +395,10 @@ input[type=search] {
 @media only screen and (max-width: 715px) {
   body {
     min-width: auto;
+  }
+
+  .admin-buttons {
+    gap: .5rem;
   }
 
   .content {
