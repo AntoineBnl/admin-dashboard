@@ -1,5 +1,7 @@
 @import 'reset.css';
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
 @font-face {
   font-family: "Inter";
   src: url("fonts/Inter.var.woff2") format("woff2 supports variations"),
@@ -11,22 +13,25 @@
 }
 
 :root {
+  --font-dark: hsl(12, 6%, 15%);
   --light-grey: hsl(214, 32%, 91%);
   --plum: hsl(350, 46%, 32%);
   --plum-dark: hsl(350, 44%, 24%);
+  --plum-light: hsl(350, 46%, 45%);
   --olive: hsl(83, 34%, 50%);
-  --blue-accent: hsl(209, 74%, 53%);
+  --blue-accent: hsl(83, 34%, 50%);
+
 }
 
 body {
   background-color: var(--light-grey);
-  font-family: Inter, var(--system-font-stack);
-  overflow-y: hidden;
-}
+  color: var(--font-dark);
+  font-family: Roboto, var(--system-font-stack);
 
-.main-container {
-  min-height: 100vh;
+  /* overflow-y: hidden; */
+  height: 100vh;
   min-width: 912px;
+
   display: grid;
   grid-template-columns: 260px 1fr;
 }
@@ -35,6 +40,7 @@ body {
 
 .sidebar {
   background-color: var(--plum);
+  max-height: max(100vh, max-content);
 }
 
 .sidebar a {
@@ -65,6 +71,10 @@ body {
   gap: 5px;
   padding: .5rem;
   margin-bottom: 50px;
+}
+
+.sidebar svg {
+  flex-shrink: 0;
 }
 
 .sidebar h3 {
@@ -102,30 +112,110 @@ body {
   margin-top: 50px;
 }
 
-/* Main content */
+/* Main container */
 
-.main-content {
+.main-container {
   display: grid;
-  grid-template-rows: 160px 1fr;
+  grid-template-rows: auto 1fr;
 
-  max-height: 100vh;
+  /* max-height: 100%; */
   overflow-y: auto;
 }
 
-/* Navbar */
+/* Header */
 
-.navbar {
+header {
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: grid;
-  grid-template: 1fr 1fr / 2fr 1fr;
+  grid-template: auto 1fr / 1.7fr 1fr;
   padding: 20px;
+  gap: 20px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 input[type=search] {
-  border-radius: .8rem;
+  border-radius: 2rem;
   border: none;
   background-color: var(--light-grey);
+  height: 1.8rem;
+  width: 80%;
+  max-width: 720px;
+  padding: .2rem .8rem;
+}
+
+.admin-buttons button {
+  border: none;
+  appearance: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+.left {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.left > img {
+  border-radius: 50%;
+  height: 75px;
+}
+
+.profile-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-name .greeting {
+  font-weight: 800;
+}
+
+.profile-name .name {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.main-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.main-buttons > button {
+  padding: .4rem .8rem;
+  width: 6rem;
+  text-align: center;
+
+  border: none;
+  font-weight: 600;
+  font-size: .9rem;
+  background-color: var(--plum);
+  color: white;
+  transition: transform ease-in 0.05s;
+  cursor: pointer;
+
+  font-weight: 500;
+  padding: 0.6rem 0;
+  border-radius: 99em;
+}
+
+.main-buttons > button:hover {
+  background-color: var(--plum-light);
+}
+
+.main-buttons > button:active {
+  transform: scale(0.95);
 }
 
 /* Content */
@@ -151,7 +241,7 @@ input[type=search] {
 .project-card {
   height: 200px;
   border-radius: .5rem;
-  background: linear-gradient(90deg, var(--blue-accent) 8px, white 10px);
+  background: linear-gradient(90deg, var(--blue-accent) 7px, white 10px);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 20px;
   line-height: 1.1;
@@ -165,7 +255,7 @@ input[type=search] {
 
 .project-card:hover {
   transform: translateX(-3px);
-  background: linear-gradient(90deg, var(--blue-accent) 8px, hsl(0, 0%, 98%) 10px);
+  background: linear-gradient(90deg, var(--blue-accent) 7px, hsl(0, 0%, 98%) 10px);
   box-shadow: rgba(0, 0, 0, 0.36) 0px 3px 8px;
   cursor: pointer;
 }
@@ -217,13 +307,15 @@ input[type=search] {
 /* Mobile Styles */
 
 @media only screen and (max-width: 911px) {
-  .main-container {
+  body {
     min-width: 620px;
     grid-template-columns: 64px 1fr;
   }
 
   .sidebar {
     z-index: 1;
+    width: 64px;
+    transition: width 200ms;
   }
 
   .sidebar h3,
@@ -251,7 +343,7 @@ input[type=search] {
 }
 
 @media only screen and (max-width: 715px) {
-  .main-container {
+  body {
     min-width: auto;
   }
 
@@ -268,7 +360,7 @@ input[type=search] {
 }
 
 @media only screen and (max-width: 459px) {
-  .navbar {
+  header {
     grid-template-columns: auto;
   }
 }
